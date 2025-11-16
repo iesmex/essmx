@@ -1,0 +1,175 @@
+﻿body {
+}
+
+/* Layout general: mapa a la izquierda, info a la derecha */
+/* Layout del mapa */
+
+.map-layout {
+    max-width: 1400px; /* MÁS ANCHO */
+    width: 100%;
+    margin: 2rem auto;
+    padding: 0 1rem 2.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+/* Panel de la derecha */
+.state-panel {
+    flex: 1.4 1 0;
+}
+
+/* RESPONSIVE: en pantallas chicas, uno debajo del otro */
+@media (max-width: 900px) {
+    .map-layout {
+        flex-direction: column;
+    }
+
+    .state-panel {
+        margin-top: 0.5rem;
+    }
+}
+.map-container svg path[id^="MX"] {
+    fill: #6c9d74; /* color base del mapa */
+    cursor: pointer;
+    transition: fill 0.2s ease, stroke-width 0.15s ease;
+}
+
+    /* Hover SOLO cuando NO está seleccionado */
+.map-container svg path[id^="MX"]:not(.state-selected):hover {
+ fill: #145c3b; /* un poco más claro al pasar el mouse */
+}
+
+/* Estado seleccionado: se mantiene después del clic */
+.map-container svg path.state-selected {
+    fill: #145c3b !important;
+    stroke: #0e4a36 !important;
+    stroke-width: 2.2px !important;
+    filter: brightness(0.85) !important;
+}
+/* Responsive extra (si quieres seguir usando map-info en otros lados) */
+@media (max-width: 900px) {
+    .map-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .map-info {
+        margin-top: 1rem;
+    }
+}
+
+/* ====== TARJETA DE ESTADO ====== */
+
+.state-report {
+    margin-top: 0; /* va a la derecha del mapa */
+    background: #ffffff;
+    border-radius: 1.25rem;
+    padding: 1.8rem 2rem;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    border: 1.5px solid #e0e7e4;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.state-header h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #123426;
+}
+
+.state-summary {
+    margin-bottom: 1.5rem;
+}
+
+.state-index {
+    background: #f4fbf7;
+    border-radius: 0.75rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #d6e6dd;
+}
+
+    .state-index .label {
+        display: block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+        color: #6b7b70;
+    }
+
+    .state-index .value {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-right: 0.75rem;
+        color: #145c3b;
+    }
+
+    .state-index .rank {
+        display: block;
+        font-size: 0.95rem;
+        color: #4b5b54;
+    }
+
+.state-table-section h3 {
+    font-size: 1.1rem;
+    margin: 0.2rem 0 0.75rem;
+    font-weight: 700;
+    color: #21413c;
+}
+
+.state-indicators {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+    .state-indicators thead {
+        background: #f0f5f3;
+    }
+
+    .state-indicators th,
+    .state-indicators td {
+        padding: 0.4rem 0.5rem;
+        border-bottom: 1px solid #e3ece6;
+    }
+
+    .state-indicators th {
+        text-align: left;
+        font-weight: 600;
+        color: #4a5b52;
+    }
+
+    .state-indicators tbody tr:hover {
+        background: #f6fbf8;
+    }
+
+.indicator-legend {
+    max-width: 1200px; /* igual que .map-layout */
+    width: 100%;
+    margin: 4rem auto 3rem; /* centra y agrega separación */
+    padding: 1.8rem 2rem;
+    background: #ffffff;
+    border-radius: 1.25rem;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+    border: 1px solid #e0e7e4;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+    .indicator-legend h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #123426;
+    }
+
+.indicator-legend-text {
+    margin: 0 0 1.2rem;
+    font-size: 0.95rem;
+    color: #4f635f;
+}
+
+.indicator-legend img {
+    margin: 2 auto;
+    display: block;
+    max-width: 100%;
+}

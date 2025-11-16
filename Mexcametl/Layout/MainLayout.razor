@@ -1,16 +1,57 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<div class="app-shell">
+
+    <!-- HEADER ESTILO IBM (BARRA SUPERIOR) -->
+    <header class="app-header">
+        <div class="app-header-inner">
+            <div class="app-brand">
+                <a href="/" class="app-logo">
+                    <!-- Aquí luego metes tu logo -->
+                    <span class="app-logo-text">ESS </span>
+                </a>
+            </div>
+
+            <nav class="app-nav">
+              
+                <NavLink href="ess" class="app-nav-link">
+                    La nueva Economía
+                </NavLink>
+                <NavLink href="software" class="app-nav-link">
+                    Rancho.com
+                </NavLink>
+                <NavLink href="revista" class="app-nav-link">
+                    Revista 
+                </NavLink>
+                 <NavLink href="Observatorio" class="app-nav-link">
+                    Observatorio  
+                </NavLink>
+                <NavLink href="noticias" class="app-nav-link">
+                    Noticias
+                </NavLink>
+
+            </nav>
+
+            <div class="app-header-actions">
+                <button class="btn-outline">
+                    Iniciar sesión
+                </button>
+            </div>
         </div>
+    </header>
 
-        <article class="content px-4">
+    <!-- CUERPO PRINCIPAL -->
+    <main class="app-main">
+        <div class="app-main-inner">
             @Body
-        </article>
+        </div>
     </main>
+
+    <!-- FOOTER SIMPLE -->
+    <footer class="app-footer">
+        <div class="app-footer-inner">
+            <span>© @DateTime.Now.Year Economía Social Solidaria · UdC + UGto</span>
+        </div>
+    </footer>
+
 </div>

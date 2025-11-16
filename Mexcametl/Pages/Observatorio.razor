@@ -1,0 +1,1791 @@
+﻿@page "/Observatorio"
+@using System.Linq
+@using Microsoft.JSInterop          
+@inject HttpClient Http
+@inject IJSRuntime JS              
+
+<h1>Mapa de la Economía Social y Solidaria en México</h1>
+
+<div class="map-layout">
+
+    <!-- COLUMNA IZQUIERDA: MAPA -->
+    <div class="map-container">
+        @if (string.IsNullOrEmpty(MapaSvg))
+        {
+            <p>@MensajeCarga</p>
+        }
+        else
+        {
+            @((MarkupString)MapaSvg)
+        }
+    </div>
+
+    <!-- COLUMNA DERECHA: PANEL DE ESTADO -->
+    <div class="state-panel">
+        @if (seleccionado is null)
+        {
+            <p style="margin-top:1rem; color:#555;">
+                Haz clic en un estado del mapa para ver su detalle.
+            </p>
+        }
+
+        @if (seleccionado?.Estado == "Aguascalientes")
+        {
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Aguascalientes</h2>
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">17.00</span>
+                            <span class="rank">Ranking nacional: 17 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Inclusión</td>          <td>0.843</td><td>9</td></tr>
+                            <tr><td>Voluntario</td>         <td>2.648</td><td>18</td></tr>
+                            <tr><td>NR Hogares</td>         <td>21.93</td><td>25</td></tr>
+                            <tr><td>No mercado</td>         <td>14.152</td><td>18</td></tr>
+                            <tr><td>PIB/Capita</td>         <td>224.009</td><td>10</td></tr>
+                            <tr><td>Gini</td>               <td>0.429</td><td>25</td></tr>
+                            <tr><td>Prop social</td>        <td>40.77</td><td>24</td></tr>
+                            <tr><td>Capital</td>            <td>12.81</td><td>31</td></tr>
+                            <tr><td>Cooperativas</td>       <td>2.057</td><td>25</td></tr>
+                            <tr><td>Comunidad</td>          <td>3.216</td><td>4</td></tr>
+                            <tr><td>Bien Común</td>         <td>5.04</td><td>8</td></tr>
+                            <tr><td>Descentralización</td>  <td>1009.41</td><td>7</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+        }
+
+        @if (seleccionado?.Estado == "Baja California")
+            {
+
+            <aside class="state-report">
+              <header class="state-header">
+                <h2>Baja California</h2>
+
+                <div class="state-summary">
+                  <div class="state-index">
+                    <span class="label">Índice ESS promedio</span>
+                    <span class="value">14.92</span>
+                    <span class="rank">Ranking nacional: 7 de 32</span>
+                  </div>
+                </div>
+              </header>
+
+              <section class="state-table-section">
+                <h3>Detalle de indicadores</h3>
+                <table class="state-indicators">
+                  <thead>
+                    <tr>
+                      <th>Indicador</th>
+                      <th>Valor</th>
+                      <th>Ranking</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Inclusión</td>          <td>0.716</td><td>20</td></tr>
+                    <tr><td>Voluntario</td>         <td>2.121</td><td>28</td></tr>
+                    <tr><td>NR Hogares</td>         <td>21.35</td><td>26</td></tr>
+                    <tr><td>No mercado</td>         <td>15.857</td><td>9</td></tr>
+                    <tr><td>PIB/Capita</td>         <td>250.815</td><td>7</td></tr>
+                    <tr><td>Gini</td>               <td>0.384</td><td>6</td></tr>
+                    <tr><td>Prop social</td>        <td>59.73</td><td>12</td></tr>
+                    <tr><td>Capital</td>            <td>32.79</td><td>10</td></tr>
+                    <tr><td>Cooperativas</td>       <td>3.11</td><td>15</td></tr>
+                    <tr><td>Comunidad</td>          <td>2.86</td><td>18</td></tr>
+                    <tr><td>Bien Común</td>         <td>4.69</td><td>12</td></tr>
+                    <tr><td>Descentralización</td>  <td>662.026</td><td>16</td></tr>
+                  </tbody>
+                </table>
+              </section>
+            </aside>
+
+            }
+        @if (seleccionado?.Estado == "Baja California Sur")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Baja California Sur</h2>
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">15.08</span>
+                            <span class="rank">Ranking nacional:  9 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                    <td>0.719</td><td>19</td></tr>
+                            <tr><td>Voluntario</td>                   <td>2.51</td><td>20</td></tr>
+                            <tr><td>NR Hogares</td>                   <td>27.16</td><td>18</td></tr>
+                            <tr><td>No mercado</td>                   <td>16.76</td><td>6</td></tr>
+                            <tr><td>PIB/Capita</td>                   <td>211.39</td><td>12</td></tr>
+                            <tr><td>Gini</td>                         <td>0.4064</td><td>17</td></tr>
+                            <tr><td>Prop social</td>                  <td>19.7</td><td>29</td></tr>
+                            <tr><td>Capital</td>                      <td>57.42</td><td>7</td></tr>
+                            <tr><td>Cooperativas</td>                 <td>13</td><td>2</td></tr>
+                            <tr><td>Comunidad</td>                    <td>2.86</td><td>19</td></tr>
+                            <tr><td>Bien Común</td>                   <td>3.63</td><td>24</td></tr>
+                            <tr><td>Descentralización</td>           <td>1003.77</td><td>8</td></tr>
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+        @if (seleccionado?.Estado == "Campeche")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Campeche</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">15.08</span>
+                            <span class="rank">Ranking nacional:  10 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                         <td>0.378</td><td>32</td></tr>
+                            <tr><td>Voluntario</td>                        <td>1.36</td><td>32</td></tr>
+                            <tr><td>NR Hogares</td>                        <td>11.26</td><td>32</td></tr>
+                            <tr><td>No mercado</td>                        <td>18.34</td><td>2</td></tr>
+                            <tr><td>PIB/Capita</td>                        <td>536.73</td><td>1</td></tr>
+                            <tr><td>Gini</td>                              <td>0.4422</td><td>28</td></tr>
+                            <tr><td>Prop social</td>                       <td>53.87</td><td>14</td></tr>
+                            <tr><td>Capital</td>                           <td>112.77</td><td>2</td></tr>
+                            <tr><td>Cooperativas</td>                      <td>9.86</td><td>4</td></tr>
+                            <tr><td>Comunidad</td>                         <td>2.94</td><td>14</td></tr>
+                            <tr><td>Bien Común</td>                        <td>4.95</td><td>9</td></tr>
+                            <tr><td>Descentralización</td>                 <td>830.86</td><td>11</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+
+
+        @if (seleccionado?.Estado == "Chiapas")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Chiapas</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">13.83</span>
+                            <span class="rank">Ranking nacional:  5 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                  <td>0.653</td><td>24</td></tr>
+                            <tr><td>Voluntario</td>                 <td>5.03</td><td>3</td></tr>
+                            <tr><td>NR Hogares</td>                  <td>67.74</td><td>1</td></tr>
+                            <tr><td>No mercado</td>                  <td>13.45</td><td>21</td></tr>
+                            <tr><td>PIB/Capita</td>                  <td>66.000</td><td>32</td></tr>
+                            <tr><td>Gini</td>                         <td>0.4667</td><td>32</td></tr>
+                            <tr><td>Prop social</td>                 <td>66.47</td><td>8</td></tr>
+                            <tr><td>Capital</td>                      <td>85.87</td><td>4</td></tr>
+                            <tr><td>Cooperativas</td>                 <td>11.3</td><td>3</td></tr>
+                            <tr><td>Comunidad</td>                    <td>3.4</td><td>1</td></tr>
+                            <tr><td>Bien Común</td>                   <td>3.87</td><td>20</td></tr>
+                            <tr><td>Descentralización</td>            <td>651.63</td><td>17</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Chihuahua")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Chihuahua</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">22.00</span>
+                            <span class="rank">Ranking nacional:  32 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                  <td>0.725</td><td>17</td></tr>
+                            <tr><td>Voluntario</td>                 <td>2.28</td><td>26</td></tr>
+                            <tr><td>NR Hogares</td>                 <td>25.42</td><td>21</td></tr>
+                            <tr><td>No mercado</td>                 <td>15.14</td><td>13</td></tr>
+                            <tr><td>PIB/Capita</td>                 <td>243.05</td><td>9</td></tr>
+                            <tr><td>Gini</td>                       <td>0.4357</td><td>26</td></tr>
+                            <tr><td>Prop social</td>                <td>19.64</td><td>30</td></tr>
+                            <tr><td>Capital</td>                    <td>22.57</td><td>19</td></tr>
+                            <tr><td>Cooperativas</td>               <td>1.8</td><td>27</td></tr>
+                            <tr><td>Comunidad</td>                  <td>2.76</td><td>22</td></tr>
+                            <tr><td>Bien Común</td>                 <td>3.11</td><td>31</td></tr>
+                            <tr><td>Descentralización</td>          <td>406.81</td><td>23</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Ciudad de México")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Ciudad de México</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">13.42</span>
+                            <span class="rank">Ranking nacional:  3 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>              <td>0.561</td><td>29</td></tr>
+                            <tr><td>Voluntario</td>             <td>4.85</td><td>4</td></tr>
+                            <tr><td>NR Hogares</td>             <td>12.32</td><td>31</td></tr>
+                            <tr><td>No mercado</td>             <td>17.53</td><td>5</td></tr>
+                            <tr><td>PIB/Capita</td>             <td>408.61</td><td>2</td></tr>
+                            <tr><td>Gini</td>                   <td>0.4633</td><td>31</td></tr>
+                            <tr><td>Prop social</td>            <td>76.54</td><td>6</td></tr>
+                            <tr><td>Capital</td>                <td>23.78</td><td>17</td></tr>
+                            <tr><td>Cooperativas</td>           <td>3.61</td><td>14</td></tr>
+                            <tr><td>Comunidad</td>              <td>3.07</td><td>7</td></tr>
+                            <tr><td>Bien Común</td>             <td>8.5</td><td>1</td></tr>
+                            <tr><td>Descentralización</td>      <td>750.3</td><td>14</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Coahuila")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Coahuila</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">19.75</span>
+                            <span class="rank">Ranking nacional:  30 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                  <td>0.578</td><td>27</td></tr>
+                            <tr><td>Voluntario</td>                 <td>1.89</td><td>31</td></tr>
+                            <tr><td>NR Hogares</td>                 <td>22.17</td><td>23</td></tr>
+                            <tr><td>No mercado</td>                 <td>11.46</td><td>31</td></tr>
+                            <tr><td>PIB/Capita</td>                 <td>279.46</td><td>4</td></tr>
+                            <tr><td>Gini</td>                       <td>0.3864</td><td>7</td></tr>
+                            <tr><td>Prop social</td>                <td>25</td><td>28</td></tr>
+                            <tr><td>Capital</td>                    <td>15.15</td><td>28</td></tr>
+                            <tr><td>Cooperativas</td>               <td>2.21</td><td>23</td></tr>
+                            <tr><td>Comunidad</td>                  <td>3.09</td><td>6</td></tr>
+                            <tr><td>Bien Común</td>                 <td>3.92</td><td>17</td></tr>
+                            <tr><td>Descentralización</td>          <td>806.44</td><td>12</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Colima")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Colima</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">15.08</span>
+                            <span class="rank">Ranking nacional:  11 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>              <td>0.624</td><td>26</td></tr>
+                            <tr><td>Voluntario</td>             <td>2.66</td><td>17</td></tr>
+                            <tr><td>NR Hogares</td>             <td>27.21</td><td>17</td></tr>
+                            <tr><td>No mercado</td>             <td>18.16</td><td>3</td></tr>
+                            <tr><td>PIB/Capita</td>             <td>208.15</td><td>15</td></tr>
+                            <tr><td>Gini</td>                   <td>0.3765</td><td>4</td></tr>
+                            <tr><td>Prop social</td>            <td>65.35</td><td>9</td></tr>
+                            <tr><td>Capital</td>                <td>58.11</td><td>6</td></tr>
+                            <tr><td>Cooperativas</td>           <td>14.26</td><td>1</td></tr>
+                            <tr><td>Comunidad</td>              <td>2.57</td><td>31</td></tr>
+                            <tr><td>Bien Común</td>             <td>3.31</td><td>30</td></tr>
+                            <tr><td>Descentralización</td>       <td>482.34</td><td>22</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+
+        }
+
+        @if (seleccionado?.Estado == "Durango")
+        {
+
+
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Durango</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">15.67</span>
+                            <span class="rank">Ranking nacional:  14 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                <td>0.656</td><td>23</td></tr>
+                            <tr><td>Voluntario</td>               <td>3.22</td><td>14</td></tr>
+                            <tr><td>NR Hogares</td>               <td>34.12</td><td>12</td></tr>
+                            <tr><td>No mercado</td>               <td>14.62</td><td>17</td></tr>
+                            <tr><td>PIB/Capita</td>               <td>163.37</td><td>20</td></tr>
+                            <tr><td>Gini</td>                     <td>0.3939</td><td>11</td></tr>
+                            <tr><td>Prop social</td>              <td>50.55</td><td>19</td></tr>
+                            <tr><td>Capital</td>                  <td>31.4</td><td>11</td></tr>
+                            <tr><td>Cooperativas</td>             <td>2.31</td><td>22</td></tr>
+                            <tr><td>Comunidad</td>                <td>2.99</td><td>11</td></tr>
+                            <tr><td>Bien Común</td>               <td>6.34</td><td>2</td></tr>
+                            <tr><td>Descentralización</td>       <td>347.01</td><td>26</td></tr>
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+
+
+        @if (seleccionado?.Estado == "Guanajuato")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Guanajuato</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">18.58</span>
+                            <span class="rank">Ranking nacional:  26 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                <td>1.216</td><td>2</td></tr>
+                            <tr><td>Voluntario</td>               <td>2.39</td><td>23</td></tr>
+                            <tr><td>NR Hogares</td>               <td>28.78</td><td>16</td></tr>
+                            <tr><td>No mercado</td>               <td>12.54</td><td>28</td></tr>
+                            <tr><td>PIB/Capita</td>               <td>179.30</td><td>17</td></tr>
+                            <tr><td>Gini</td>                     <td>0.3700</td><td>3</td></tr>
+                            <tr><td>Prop social</td>              <td>43.8</td><td>22</td></tr>
+                            <tr><td>Capital</td>                  <td>18.3</td><td>25</td></tr>
+                            <tr><td>Cooperativas</td>             <td>1.02</td><td>28</td></tr>
+                            <tr><td>Comunidad</td>                <td>3.16</td><td>5</td></tr>
+                            <tr><td>Bien Común</td>               <td>3.53</td><td>26</td></tr>
+                            <tr><td>Descentralización</td>       <td>328.96</td><td>28</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Guerrero")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Guerrero</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">14.92</span>
+                            <span class="rank">Ranking nacional:  8 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                 <td>1.239</td><td>1</td></tr>
+                            <tr><td>Voluntario</td>                <td>4.48</td><td>6</td></tr>
+                            <tr><td>NR Hogares</td>                <td>54.99</td><td>2</td></tr>
+                            <tr><td>No mercado</td>                <td>15.51</td><td>11</td></tr>
+                            <tr><td>PIB/Capita</td>                <td>86.921</td><td>31</td></tr>
+                            <tr><td>Gini</td>                      <td>0.4503</td><td>30</td></tr>
+                            <tr><td>Prop social</td>               <td>80.18</td><td>4</td></tr>
+                            <tr><td>Capital</td>                   <td>52.58</td><td>8</td></tr>
+                            <tr><td>Cooperativas</td>              <td>4.68</td><td>10</td></tr>
+                            <tr><td>Comunidad</td>                 <td>2.74</td><td>23</td></tr>
+                            <tr><td>Bien Común</td>                <td>3.4</td><td>29</td></tr>
+                            <tr><td>Descentralización</td>         <td>398.85</td><td>24</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+        }
+
+
+        @if (seleccionado?.Estado == "Hidalgo")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Hidalgo</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">16.42</span>
+                            <span class="rank">Ranking nacional:  16 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>               <td>0.844</td><td>8</td></tr>
+                            <tr><td>Voluntario</td>              <td>3.14</td><td>15</td></tr>
+                            <tr><td>NR Hogares</td>              <td>38.36</td><td>8</td></tr>
+                            <tr><td>No mercado</td>              <td>13</td><td>23</td></tr>
+                            <tr><td>PIB/Capita</td>              <td>137.26</td><td>22</td></tr>
+                            <tr><td>Gini</td>                    <td>0.3949</td><td>12</td></tr>
+                            <tr><td>Prop social</td>             <td>52.12</td><td>17</td></tr>
+                            <tr><td>Capital</td>                 <td>28.65</td><td>12</td></tr>
+                            <tr><td>Cooperativas</td>            <td>3.04</td><td>16</td></tr>
+                            <tr><td>Comunidad</td>               <td>2.69</td><td>28</td></tr>
+                            <tr><td>Bien Común</td>              <td>4.07</td><td>16</td></tr>
+                            <tr><td>Descentralización</td>      <td>545.01</td><td>20</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Jalisco")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Jalisco</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">15.75</span>
+                            <span class="rank">Ranking nacional:  15 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>               <td>0.795</td><td>12</td></tr>
+                            <tr><td>Voluntario</td>              <td>3.27</td><td>13</td></tr>
+                            <tr><td>NR Hogares</td>              <td>23.55</td><td>22</td></tr>
+                            <tr><td>No mercado</td>              <td>11.02</td><td>32</td></tr>
+                            <tr><td>PIB/Capita</td>              <td>211.59</td><td>11</td></tr>
+                            <tr><td>Gini</td>                    <td>0.3662</td><td>2</td></tr>
+                            <tr><td>Prop social</td>             <td>38</td><td>26</td></tr>
+                            <tr><td>Capital</td>                 <td>9.72</td><td>32</td></tr>
+                            <tr><td>Cooperativas</td>            <td>4.27</td><td>12</td></tr>
+                            <tr><td>Comunidad</td>               <td>2.93</td><td>15</td></tr>
+                            <tr><td>Bien Común</td>              <td>4.82</td><td>10</td></tr>
+                            <tr><td>Descentralización</td>       <td>1376.27</td><td>2</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "México")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>México</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">18.50</span>
+                            <span class="rank">Ranking nacional:  25 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                    <td>0.881</td><td>7</td></tr>
+                            <tr><td>Voluntario</td>                   <td>2.47</td><td>21</td></tr>
+                            <tr><td>NR Hogares</td>                   <td>35.78</td><td>10</td></tr>
+                            <tr><td>No mercado</td>                   <td>12.38</td><td>30</td></tr>
+                            <tr><td>PIB/Capita</td>                   <td>129.16</td><td>27</td></tr>
+                            <tr><td>Gini</td>                         <td>0.3821</td><td>5</td></tr>
+                            <tr><td>Prop social</td>                  <td>62.4</td><td>10</td></tr>
+                            <tr><td>Capital</td>                      <td>14.39</td><td>29</td></tr>
+                            <tr><td>Cooperativas</td>                 <td>0.19</td><td>32</td></tr>
+                            <tr><td>Comunidad</td>                    <td>3.26</td><td>3</td></tr>
+                            <tr><td>Bien Común</td>                   <td>3.5</td><td>27</td></tr>
+                            <tr><td>Descentralización</td>           <td>524.51</td><td>21</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Michoacán")
+        {
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Michoacán</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">15.50</span>
+                            <span class="rank">Ranking nacional:  13 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>               <td>0.839</td><td>10</td></tr>
+                            <tr><td>Voluntario</td>              <td>3.55</td><td>11</td></tr>
+                            <tr><td>NR Hogares</td>              <td>37.45</td><td>9</td></tr>
+                            <tr><td>No mercado</td>              <td>15.05</td><td>15</td></tr>
+                            <tr><td>PIB/Capita</td>              <td>137.08</td><td>23</td></tr>
+                            <tr><td>Gini</td>                    <td>0.4250</td><td>23</td></tr>
+                            <tr><td>Prop social</td>             <td>54.31</td><td>13</td></tr>
+                            <tr><td>Capital</td>                 <td>24.49</td><td>16</td></tr>
+                            <tr><td>Cooperativas</td>            <td>2.97</td><td>17</td></tr>
+                            <tr><td>Comunidad</td>               <td>2.89</td><td>17</td></tr>
+                            <tr><td>Bien Común</td>              <td>4.69</td><td>13</td></tr>
+                            <tr><td>Descentralización</td>        <td>550.97</td><td>19</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+        }
+
+
+        @if (seleccionado?.Estado == "Morelos")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Morelos</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">18.67</span>
+                            <span class="rank">Ranking nacional:  27 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                <td>0.698</td><td>22</td></tr>
+                            <tr><td>Voluntario</td>               <td>5.21</td><td>2</td></tr>
+                            <tr><td>NR Hogares</td>               <td>35.12</td><td>11</td></tr>
+                            <tr><td>No mercado</td>               <td>12.77</td><td>26</td></tr>
+                            <tr><td>PIB/Capita</td>               <td>134.42</td><td>24</td></tr>
+                            <tr><td>Gini</td>                     <td>79.8</td><td>5</td></tr>
+                            <tr><td>Capital</td>                  <td>16.04</td><td>26</td></tr>
+                            <tr><td>Cooperativas</td>             <td>2.47</td><td>21</td></tr>
+                            <tr><td>Comunidad</td>                <td>2.41</td><td>32</td></tr>
+                            <tr><td>Bien Común</td>               <td>5.5</td><td>5</td></tr>
+                            <tr><td>Descentralización</td>        <td>252.05</td><td>30</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+
+        @if (seleccionado?.Estado == "Nayarit")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Nayarit</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">12.00</span>
+                            <span class="rank">Ranking nacional:  1 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                <td>0.817</td><td>11</td></tr>
+                            <tr><td>Voluntario</td>               <td>4.52</td><td>5</td></tr>
+                            <tr><td>NR Hogares</td>               <td>40.8</td><td>6</td></tr>
+                            <tr><td>No mercado</td>               <td>16.03</td><td>8</td></tr>
+                            <tr><td>PIB/Capita</td>               <td>127.57</td><td>28</td></tr>
+                            <tr><td>Gini</td>                     <td>0.4372</td><td>27</td></tr>
+                            <tr><td>Prop social</td>              <td>80.88</td><td>3</td></tr>
+                            <tr><td>Capital</td>                  <td>39.95</td><td>9</td></tr>
+                            <tr><td>Cooperativas</td>             <td>5.97</td><td>7</td></tr>
+                            <tr><td>Comunidad</td>                <td>2.64</td><td>30</td></tr>
+                            <tr><td>Bien Común</td>               <td>5.1</td><td>7</td></tr>
+                            <tr><td>Descentralización</td>        <td>1371.31</td><td>3</td></tr>
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+
+        }
+
+        @if (seleccionado?.Estado == "Nuevo León")
+        {
+
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Nuevo León</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">20.50</span>
+                            <span class="rank">Ranking nacional:  31 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                   <td>0.452</td><td>30</td></tr>
+                            <tr><td>Voluntario</td>                  <td>1.94</td><td>29</td></tr>
+                            <tr><td>NR Hogares</td>                  <td>16.33</td><td>29</td></tr>
+                            <tr><td>No mercado</td>                  <td>12.82</td><td>25</td></tr>
+                            <tr><td>PIB/Capita</td>                  <td>327.43</td><td>3</td></tr>
+                            <tr><td>Gini</td>                        <td>0.3979</td><td>13</td></tr>
+                            <tr><td>Prop social</td>                 <td>14.19</td><td>32</td></tr>
+                            <tr><td>Capital</td>                     <td>18.54</td><td>24</td></tr>
+                            <tr><td>Cooperativas</td>                <td>2.01</td><td>26</td></tr>
+                            <tr><td>Comunidad</td>                   <td>2.99</td><td>12</td></tr>
+                            <tr><td>Bien Común</td>                  <td>3.92</td><td>18</td></tr>
+                            <tr><td>Descentralización</td>          <td>1102.16</td><td>5</td></tr>
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+
+        @if (seleccionado?.Estado == "Oaxaca")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Oaxaca</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">17.50</span>
+                            <span class="rank">Ranking nacional:  21 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>			<td>0.706</td><td>21</td></tr>
+                            <tr><td>Voluntario</td>                 <td>5.48</td><td>1</td></tr>
+                            <tr><td>NR Hogares</td>                 <td>48.42</td><td>3</td></tr>
+                            <tr><td>No mercado</td>                 <td>13.81</td><td>20</td></tr>
+                            <tr><td>PIB/Capita</td>                 <td>104.47</td><td>30</td></tr>
+                            <tr><td>Gini</td>                       <td>0.4457</td><td>29</td></tr>
+                            <tr><td>Prop social</td>                <td>84.45</td><td>2</td></tr>
+                            <tr><td>Capital</td>                    <td>24.57</td><td>15</td></tr>
+                            <tr><td>Cooperativas</td>               <td>5.64</td><td>9</td></tr>
+                            <tr><td>Comunidad</td>                  <td>2.73</td><td>24</td></tr>
+                            <tr><td>Bien Común</td>                 <td>3.54</td><td>25</td></tr>
+                            <tr><td>Descentralización</td>          <td>130.96</td><td>31</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Puebla")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Puebla</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">18.25</span>
+                            <span class="rank">Ranking nacional:  24 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                        <td>1</td><td>4</td></tr>
+                            <tr><td>Voluntario</td>                       <td>2.65</td><td>19</td></tr>
+                            <tr><td>NR Hogares</td>                       <td>32.72</td><td>13</td></tr>
+                            <tr><td>No mercado</td>                       <td>12.67</td><td>27</td></tr>
+                            <tr><td>PIB/Capita</td>                       <td>129.87</td><td>26</td></tr>
+                            <tr><td>Gini</td>                             <td>0.4010</td><td>14</td></tr>
+                            <tr><td>Prop social</td>                      <td>47.79</td><td>21</td></tr>
+                            <tr><td>Capital</td>                          <td>18.99</td><td>23</td></tr>
+                            <tr><td>Cooperativas</td>                     <td>2.11</td><td>24</td></tr>
+                            <tr><td>Comunidad</td>                        <td>3.02</td><td>10</td></tr>
+                            <tr><td>Bien Común</td>                       <td>3.67</td><td>23</td></tr>
+                            <tr><td>Descentralización</td>               <td>675.4</td><td>15</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+        }
+
+        @if (seleccionado?.Estado == "Querétaro")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Querétaro</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">15.25</span>
+                            <span class="rank">Ranking nacional:  12 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                    <td>0.794</td><td>13</td></tr>
+                            <tr><td>Voluntario</td>                   <td>3.65</td><td>10</td></tr>
+                            <tr><td>NR Hogares</td>                   <td>16.01</td><td>30</td></tr>
+                            <tr><td>No mercado</td>                   <td>12.46</td><td>29</td></tr>
+                            <tr><td>PIB/Capita</td>                   <td>244.43</td><td>8</td></tr>
+                            <tr><td>Gini</td>                         <td>0.3897</td><td>10</td></tr>
+                            <tr><td>Prop social</td>                  <td>48.43</td><td>20</td></tr>
+                            <tr><td>Capital</td>                      <td>13.29</td><td>30</td></tr>
+                            <tr><td>Cooperativas</td>                 <td>4.6</td><td>11</td></tr>
+                            <tr><td>Comunidad</td>                    <td>3.04</td><td>8</td></tr>
+                            <tr><td>Bien Común</td>                   <td>6.23</td><td>4</td></tr>
+                            <tr><td>Descentralización</td>            <td>861.28</td><td>10</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+        }
+
+
+
+        @if (seleccionado?.Estado == "Quintana Roo")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Quintana Roo</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">17.08</span>
+                            <span class="rank">Ranking nacional:  20 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                <td>1.107</td><td>3</td></tr>
+                            <tr><td>Voluntario</td>               <td>2.3</td><td>25</td></tr>
+                            <tr><td>NR Hogares</td>               <td>17.42</td><td>28</td></tr>
+                            <tr><td>No mercado</td>               <td>13.99</td><td>19</td></tr>
+                            <tr><td>PIB/Capita</td>               <td>208.81</td><td>14</td></tr>
+                            <tr><td>Gini</td>                     <td>0.4055</td><td>15</td></tr>
+                            <tr><td>Prop social</td>              <td>89.08</td><td>1</td></tr>
+                            <tr><td>Capital</td>                  <td>22.12</td><td>21</td></tr>
+                            <tr><td>Cooperativas</td>             <td>6.16</td><td>6</td></tr>
+                            <tr><td>Comunidad</td>                <td>2.72</td><td>25</td></tr>
+                            <tr><td>Bien Común</td>               <td>3.86</td><td>21</td></tr>
+                            <tr><td>Descentralización</td>        <td>330.52</td><td>27</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+        }
+
+
+        @if (seleccionado?.Estado == "San Luis Potosí")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>San Luis Potosí</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">17.50</span>
+                            <span class="rank">Ranking nacional:  22 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                 <td>0.761</td><td>15</td></tr>
+                            <tr><td>Voluntario</td>                <td>1.93</td><td>30</td></tr>
+                            <tr><td>NR Hogares</td>                <td>26.99</td><td>19</td></tr>
+                            <tr><td>No mercado</td>                <td>15.57</td><td>10</td></tr>
+                            <tr><td>PIB/Capita</td>                <td>200.57</td><td>16</td></tr>
+                            <tr><td>Gini</td>                      <td>0.4096</td><td>19</td></tr>
+                            <tr><td>Prop social</td>               <td>52.2</td><td>16</td></tr>
+                            <tr><td>Capital</td>                   <td>22.14</td><td>20</td></tr>
+                            <tr><td>Cooperativas</td>              <td>0.89</td><td>29</td></tr>
+                            <tr><td>Comunidad</td>                 <td>2.98</td><td>13</td></tr>
+                            <tr><td>Bien Común</td>                <td>3.85</td><td>22</td></tr>
+                            <tr><td>Descentralización</td>         <td>3207.87</td><td>1</td></tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+        @if (seleccionado?.Estado == "Sinaloa")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Sinaloa</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">12.17</span>
+                            <span class="rank">Ranking nacional:  2 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                   <td>0.723</td><td>18</td></tr>
+                            <tr><td>Voluntario</td>                  <td>3.73</td><td>9</td></tr>
+                            <tr><td>NR Hogares</td>                  <td>31.93</td><td>14</td></tr>
+                            <tr><td>No mercado</td>                  <td>15.08</td><td>14</td></tr>
+                            <tr><td>PIB/Capita</td>                  <td>167.59</td><td>18</td></tr>
+                            <tr><td>Gini</td>                        <td>0.3868</td><td>8</td></tr>
+                            <tr><td>Prop social</td>                 <td>72.67</td><td>7</td></tr>
+                            <tr><td>Capital</td>                     <td>28.21</td><td>13</td></tr>
+                            <tr><td>Cooperativas</td>                <td>2.5</td><td>20</td></tr>
+                            <tr><td>Comunidad</td>                   <td>2.91</td><td>16</td></tr>
+                            <tr><td>Bien Común</td>                  <td>6.32</td><td>3</td></tr>
+                            <tr><td>Descentralización</td>           <td>1009.66</td><td>6</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+
+        @if (seleccionado?.Estado == "Sonora")
+        {
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Sonora</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">19.25</span>
+                            <span class="rank">Ranking nacional:  28 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                                <td>0.649</td><td>25</td></tr>
+                            <tr><td>Voluntario</td>                             <td>2.28</td><td>27</td></tr>
+                            <tr><td>NR Hogares</td>                           <td>21.98</td><td>24</td></tr>
+                            <tr><td>No mercado</td>                          <td>16.27</td><td>7</td></tr>
+                            <tr><td>PIB/Capita</td>                             <td>275.53</td><td>5</td></tr>
+                            <tr><td>Gini</td>                                        <td>0.4062</td><td>16</td></tr>
+                            <tr><td>Prop social</td>                             <td>18.36</td><td>31</td></tr>
+                            <tr><td>Capital</td>                                    <td>22.02</td><td>22</td></tr>
+                            <tr><td>Cooperativas</td>                          <td>3.73</td><td>13</td></tr>
+                            <tr><td>Comunidad</td>                            <td>2.78</td><td>21</td></tr>
+                            <tr><td>Bien Común</td>                           <td>4.81</td><td>11</td></tr>
+                            <tr><td>Descentralización</td>                 <td>302.43</td><td>29</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+        @if (seleccionado?.Estado == "Tabasco")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Tabasco</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">13.50</span>
+                            <span class="rank">Ranking nacional:  4 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                  <td>0.39</td><td>31</td></tr>
+                            <tr><td>Voluntario</td>                 <td>2.38</td><td>24</td></tr>
+                            <tr><td>NR Hogares</td>                 <td>17.69</td><td>27</td></tr>
+                            <tr><td>No mercado</td>                 <td>18.11</td><td>4</td></tr>
+                            <tr><td>PIB/Capita</td>                 <td>262.48</td><td>6</td></tr>
+                            <tr><td>Gini</td>                       <td>0.4174</td><td>21</td></tr>
+                            <tr><td>Prop social</td>                <td>52.54</td><td>15</td></tr>
+                            <tr><td>Capital</td>                    <td>181.08</td><td>1</td></tr>
+                            <tr><td>Cooperativas</td>               <td>9.54</td><td>5</td></tr>
+                            <tr><td>Comunidad</td>                  <td>3.02</td><td>9</td></tr>
+                            <tr><td>Bien Común</td>                 <td>5.14</td><td>6</td></tr>
+                            <tr><td>Descentralización</td>         <td>762.55</td><td>13</td></tr>
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+        }
+
+        @if (seleccionado?.Estado == "Tamaulipas")
+        {
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Tamaulipas</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">16.75</span>
+                            <span class="rank">Ranking nacional:  18 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                    <td>0.766</td><td>14</td></tr>
+                            <tr><td>Voluntario</td>                   <td>2.45</td><td>22</td></tr>
+                            <tr><td>NR Hogares</td>                   <td>30.76</td><td>15</td></tr>
+                            <tr><td>No mercado</td>                   <td>15.21</td><td>12</td></tr>
+                            <tr><td>PIB/Capita</td>                   <td>209.12</td><td>13</td></tr>
+                            <tr><td>Gini</td>                         <td>0.3896</td><td>9</td></tr>
+                            <tr><td>Prop social</td>                  <td>31.38</td><td>27</td></tr>
+                            <tr><td>Capital</td>                      <td>68.76</td><td>5</td></tr>
+                            <tr><td>Cooperativas</td>                 <td>2.97</td><td>18</td></tr>
+                            <tr><td>Comunidad</td>                    <td>2.68</td><td>29</td></tr>
+                            <tr><td>Bien Común</td>                   <td>3.88</td><td>19</td></tr>
+                            <tr><td>Descentralización</td>            <td>583.81</td><td>18</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+        @if (seleccionado?.Estado == "Tlaxcala")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Tlaxcala</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">14.17</span>
+                            <span class="rank">Ranking nacional:  6 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                     <td>0.985</td><td>5</td></tr>
+                            <tr><td>Voluntario</td>                    <td>3.53</td><td>12</td></tr>
+                            <tr><td>NR Hogares</td>                    <td>45.19</td><td>4</td></tr>
+                            <tr><td>No mercado</td>                    <td>13.44</td><td>22</td></tr>
+                            <tr><td>PIB/Capita</td>                    <td>104.80</td><td>29</td></tr>
+                            <tr><td>Gini</td>                          <td>0.3435</td><td>1</td></tr>
+                            <tr><td>Prop social</td>                   <td>60.52</td><td>11</td></tr>
+                            <tr><td>Capital</td>                       <td>23.15</td><td>18</td></tr>
+                            <tr><td>Cooperativas</td>                  <td>0.84</td><td>30</td></tr>
+                            <tr><td>Comunidad</td>                     <td>3.35</td><td>2</td></tr>
+                            <tr><td>Bien Común</td>                    <td>2.69</td><td>32</td></tr>
+                            <tr><td>Descentralización</td>             <td>1352.14</td><td>4</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+        }
+
+        @if (seleccionado?.Estado == "Veracruz")
+        {
+
+
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Veracruz</h2>
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">17.58</span>
+                            <span class="rank">Ranking nacional:  23 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>               <td>0.903</td><td>6</td></tr>
+                            <tr><td>Voluntario</td>              <td>2.76</td><td>16</td></tr>
+                            <tr><td>NR Hogares</td>              <td>38.55</td><td>7</td></tr>
+                            <tr><td>No mercado</td>              <td>13</td><td>24</td></tr>
+                            <tr><td>PIB/Capita</td>              <td>131.41</td><td>25</td></tr>
+                            <tr><td>Gini</td>                    <td>0.4265</td><td>24</td></tr>
+                            <tr><td>Prop social</td>             <td>50.84</td><td>18</td></tr>
+                            <tr><td>Capital</td>                 <td>107.65</td><td>3</td></tr>
+                            <tr><td>Cooperativas</td>            <td>5.96</td><td>8</td></tr>
+                            <tr><td>Comunidad</td>               <td>2.7</td><td>27</td></tr>
+                            <tr><td>Bien Común</td>              <td>3.49</td><td>28</td></tr>
+                            <tr><td>Descentralización</td>       <td>355.51</td><td>25</td></tr>
+
+
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+        }
+
+
+        @if (seleccionado?.Estado == "Yucatán")
+        {
+
+            <aside class="state-report">
+                <header class="state-header">
+                    <h2>Yucatán</h2>
+
+
+                    <div class="state-summary">
+                        <div class="state-index">
+                            <span class="label">Índice ESS promedio</span>
+                            <span class="value">19.67</span>
+                            <span class="rank">Ranking nacional:  29 de 32</span>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="state-table-section">
+                    <h3>Detalle de indicadores</h3>
+                    <table class="state-indicators">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Valor</th>
+                                <th>Ranking</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr><td>Inclusión</td>                  <td>0.576</td><td>28</td></tr>
+                            <tr><td>Voluntario</td>                 <td>3.88</td><td>7</td></tr>
+                            <tr><td>NR Hogares</td>                 <td>25.86</td><td>20</td></tr>
+                            <tr><td>No mercado</td>                 <td>14.76</td><td>16</td></tr>
+                            <tr><td>PIB/Capita</td>                 <td>163.77</td><td>19</td></tr>
+                            <tr><td>Gini</td>                       <td>0.4187</td><td>22</td></tr>
+                            <tr><td>Prop social</td>                <td>38.88</td><td>25</td></tr>
+                            <tr><td>Capital</td>                    <td>25.76</td><td>14</td></tr>
+                            <tr><td>Cooperativas</td>               <td>2.82</td><td>19</td></tr>
+                            <tr><td>Comunidad</td>                  <td>2.84</td><td>20</td></tr>
+                            <tr><td>Bien Común</td>                 <td>4.67</td><td>14</td></tr>
+                            <tr><td>Descentralización</td>         <td>116.7</td><td>32</td></tr>
+
+                        </tbody>
+                    </table>
+                </section>
+            </aside>
+
+
+        }
+        
+@if (seleccionado?.Estado == "Zacatecas")
+{
+
+
+
+<aside class="state-report">
+  <header class="state-header">
+    <h2>Zacatecas</h2>
+
+    <div class="state-summary">
+      <div class="state-index">
+        <span class="label">Índice ESS promedio</span>
+        <span class="value">16.67</span>
+        <span class="rank">Ranking nacional:  17 de 32</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="state-table-section">
+    <h3>Detalle de indicadores</h3>
+    <table class="state-indicators">
+      <thead>
+        <tr>
+          <th>Indicador</th>
+          <th>Valor</th>
+          <th>Ranking</th>
+        </tr>
+      </thead>
+      <tbody>
+   
+	<tr><td>Inclusión</td>                   <td>0.751</td><td>16</td></tr>				
+	<tr><td>Voluntario</td>                  <td>3.85</td><td>8</td></tr>				
+	<tr><td>NR Hogares</td>                  <td>44.75</td><td>5</td></tr>				
+	<tr><td>No mercado</td>                  <td>18.41</td><td>1</td></tr>				
+	<tr><td>PIB/Capita</td>                  <td>139.12</td><td>21</td></tr>				
+	<tr><td>Gini</td>                        <td>0.4095</td><td>18</td></tr>				
+	<tr><td>Prop social</td>                 <td>41.99</td><td>23</td></tr>				
+	<tr><td>Capital</td>                     <td>15.55</td><td>27</td></tr>				
+	<tr><td>Cooperativas</td>                <td>0.39</td><td>31</td></tr>				
+	<tr><td>Comunidad</td>                   <td>2.71</td><td>26</td></tr>				
+	<tr><td>Bien Común</td>                  <td>4.35</td><td>15</td></tr>				
+ 	<tr><td>Descentralización</td>           <td>920.11</td><td>9</td></tr>				
+		
+	
+      </tbody>
+    </table>
+  </section>
+</aside>
+
+        }
+        @* Aquí irán más bloques:
+        @if (seleccionado?.Estado == "Baja California") { ... }
+        @if (seleccionado?.Estado == "Chiapas") { ... }
+        etc., usando el HTML que ya tienes *@
+    </div>
+</div>
+
+<div class="indicator-legend">
+    <h2>¿Qué significa cada apartado?</h2>
+
+    <p class="indicator-legend-text">
+        Esta tabla resume cada indicador utilizado en el Índice ESS
+        
+    </p>
+
+    <img src="indicadores.png"
+         alt="Descripción de los indicadores de la Economía Social y Solidaria en México" />
+</div>
+
+@code {
+    private string MapaSvg = string.Empty;
+    private string MensajeCarga = "Cargando mapa...";
+
+    // Estado actualmente seleccionado en el mapa
+    private IndicadorEstado? seleccionado;
+
+    // ⭐ referencia para JS interop
+    private DotNetObjectReference<Observatorio>? _objRef;
+    private bool _jsInicializado = false;   // ⭐ NUEVO
+    [JSInvokable]
+public string GetFillColorJs(string claveSvg) => GetFillColor(claveSvg);
+    // Catálogo de estados con su índice ESS
+    private List<IndicadorEstado> Indicadores { get; set; } = new()
+    {
+
+        new() { ClaveSvg = "MXAGU", Estado = "Aguascalientes",       Promedio = 17.00, Ranking = 19  },
+        new() { ClaveSvg = "MXBCN", Estado = "Baja California",      Promedio = 14.92, Ranking = 7   },
+        new() { ClaveSvg = "MXBCS", Estado = "Baja California Sur",  Promedio = 15.08, Ranking = 9   },
+        new() { ClaveSvg = "MXCAM", Estado = "Campeche",             Promedio = 15.08, Ranking = 10  },
+        new() { ClaveSvg = "MXCHP", Estado = "Chiapas",              Promedio = 13.83, Ranking = 5   },
+        new() { ClaveSvg = "MXCHH", Estado = "Chihuahua",            Promedio = 22.00, Ranking = 32  },
+        new() { ClaveSvg = "MXCMX", Estado = "Ciudad de México",     Promedio = 13.42, Ranking = 3   },
+        new() { ClaveSvg = "MXCOA", Estado = "Coahuila",             Promedio = 19.75, Ranking = 30  },
+        new() { ClaveSvg = "MXCOL", Estado = "Colima",               Promedio = 15.08, Ranking = 11  },
+        new() { ClaveSvg = "MXDUR", Estado = "Durango",              Promedio = 15.67, Ranking = 14  },
+        new() { ClaveSvg = "MXGUA", Estado = "Guanajuato",           Promedio = 18.58, Ranking = 26  },
+        new() { ClaveSvg = "MXGRO", Estado = "Guerrero",             Promedio = 14.92, Ranking = 8   },
+        new() { ClaveSvg = "MXHID", Estado = "Hidalgo",              Promedio = 16.42, Ranking = 16  },
+        new() { ClaveSvg = "MXJAL", Estado = "Jalisco",              Promedio = 15.75, Ranking = 15  },
+        new() { ClaveSvg = "MXMEX", Estado = "México",               Promedio = 18.50, Ranking = 25  },
+        new() { ClaveSvg = "MXMIC", Estado = "Michoacán",            Promedio = 15.50, Ranking = 13  },
+        new() { ClaveSvg = "MXMOR", Estado = "Morelos",              Promedio = 18.67, Ranking = 27  },
+        new() { ClaveSvg = "MXNAY", Estado = "Nayarit",              Promedio = 12.00, Ranking = 1   },
+        new() { ClaveSvg = "MXNLE", Estado = "Nuevo León",           Promedio = 20.50, Ranking = 31  },
+        new() { ClaveSvg = "MXOAX", Estado = "Oaxaca",               Promedio = 17.50, Ranking = 21  },
+        new() { ClaveSvg = "MXPUE", Estado = "Puebla",               Promedio = 18.25, Ranking = 24  },
+        new() { ClaveSvg = "MXQUE", Estado = "Querétaro",            Promedio = 15.25, Ranking = 12  },
+        new() { ClaveSvg = "MXROO", Estado = "Quintana Roo",         Promedio = 17.08, Ranking = 20  },
+        new() { ClaveSvg = "MXSLP", Estado = "San Luis Potosí",      Promedio = 17.50, Ranking = 22  },
+        new() { ClaveSvg = "MXSIN", Estado = "Sinaloa",              Promedio = 12.17, Ranking = 2   },
+        new() { ClaveSvg = "MXSON", Estado = "Sonora",               Promedio = 19.25, Ranking = 28  },
+        new() { ClaveSvg = "MXTAB", Estado = "Tabasco",              Promedio = 13.50, Ranking = 4   },
+        new() { ClaveSvg = "MXTAM", Estado = "Tamaulipas",           Promedio = 16.75, Ranking = 18  },
+        new() { ClaveSvg = "MXTLA", Estado = "Tlaxcala",             Promedio = 14.17, Ranking = 6   },
+        new() { ClaveSvg = "MXVER", Estado = "Veracruz",             Promedio = 17.58, Ranking = 23  },
+        new() { ClaveSvg = "MXYUC", Estado = "Yucatán",              Promedio = 19.67, Ranking = 29  },
+        new() { ClaveSvg = "MXZAC", Estado = "Zacatecas",            Promedio = 16.67, Ranking = 17  }
+    };
+
+    public class FilaIndicador
+    {
+        public string Nombre { get; set; } = "";
+        public double Valor { get; set; }
+        public int Ranking { get; set; }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            MapaSvg = await Http.GetStringAsync("/plano/mx.svg");
+            MensajeCarga = "Mapa cargado.";
+        }
+        catch (Exception ex)
+        {
+            MensajeCarga = $"Error al cargar mx.svg: {ex.Message}";
+        }
+    }
+
+    // ⭐ Aquí conectamos con el JavaScript mapa-ess.js
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // ⭐ Solo inicializamos JS una vez, pero esperamos a que MapaSvg tenga contenido
+        if (!_jsInicializado && !string.IsNullOrEmpty(MapaSvg))
+        {
+            _objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("mapaEss.init", _objRef);
+            _jsInicializado = true;
+        }
+    }
+
+    // ⭐ Este método lo llama JavaScript cuando se hace clic en un estado
+    [JSInvokable]
+    public void OnEstadoClick(string claveSvg)
+    {
+        seleccionado = Indicadores.FirstOrDefault(i => i.ClaveSvg == claveSvg);
+        StateHasChanged();
+    }
+
+    private string GetFillColor(string claveSvg)
+    {
+        var dato = Indicadores.FirstOrDefault(i => i.ClaveSvg == claveSvg);
+        if (dato is null) return "#cccccc";
+
+        if (dato.Promedio < 14) return "#0d7a5a";
+        if (dato.Promedio < 18) return "#61b58a";
+        if (dato.Promedio < 22) return "#ffd76a";
+        return "#f18f5b";
+    }
+
+    public class IndicadorEstado
+    {
+        public string Estado { get; set; } = "";
+        public string ClaveSvg { get; set; } = "";
+        public double Promedio { get; set; }
+        public int Ranking { get; set; }
+        public List<FilaIndicador> Detalle { get; set; } = new();
+    }
+}

@@ -1,0 +1,220 @@
+﻿:root {
+    --ess-green: #0d7a5a;
+    --ess-green-dark: #0a5a42;
+    --ess-cream: #f6fff8;
+    --ess-card-bg: #f7fbf9;
+    --ess-text: #234043;
+}
+
+.home-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #e7fff3 0%, #f9fffd 40%, #ffffff 100%);
+    color: var(--ess-text);
+    padding-bottom: 3rem;
+}
+
+/* ---------------- HERO ---------------- */
+.ess-main-title {
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-top: 1rem;
+    margin-bottom: 0.8rem;
+    color: var(--ess-green-dark);
+    padding: 0 1rem;
+}
+.ess-subtitle {
+    width: 100%;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 450;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--ess-green-dark);
+    padding: 0 .5rem;
+}
+.ess-hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.ess-hero-text h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.4rem;
+    font-weight: 800;
+    text-align: justify;
+    color: var(--ess-green-dark);
+}
+
+
+
+.ess-hero-text h2 {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+    text-align: left;
+}
+
+.ess-hero-text p {
+    text-align: justify;
+    line-height: 1.6;
+    margin-bottom: 0.9rem;
+}
+
+.ess-questions {
+    padding-left: 1.2rem;
+    margin-bottom: 1.4rem;
+}
+
+    .ess-questions li {
+        margin-bottom: 0.25rem;
+        font-weight: 500;
+    }
+
+
+/* Lado derecho: GIF */
+
+.ess-hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ess-gif {
+    width: 100%;
+    max-width: 500px;
+    border-radius: .5rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    
+}
+
+
+
+
+/* ---------------- SECCIONES ---------------- */
+
+.ess-sections {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 3rem;
+}
+
+    .ess-sections h2 {
+        text-align: left;
+        font-weight: 500;
+        margin-bottom: 0.75rem;
+        color: var(--ess-green-dark);
+    }
+
+.ess-sections-intro {
+    max-width: 720px;
+    text-align: left;
+    margin-bottom: 1.8rem;
+}
+
+.ess-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.ess-section-card {
+    background: var(--ess-card-bg);
+    border-radius: 1rem;
+    padding: 1.2rem 1.2rem 1.3rem;
+    border-top: 4px solid var(--ess-green);
+    box-shadow: 0 6px 18px rgba(25, 92, 71, 0.08);
+    transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+    .ess-section-card h3 {
+        font-weight: 700;
+        font-size: 1.05rem;
+        margin-bottom: 0.6rem;
+
+    }
+
+    .ess-section-card p {
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+
+    .ess-section-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 24px rgba(25, 92, 71, 0.14);
+        border-color: var(--ess-green-dark);
+    }
+
+/* ---------------- QUIÉNES SOMOS ---------------- */
+
+.ess-about {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 1.5rem;
+    text-align: left;
+}
+
+    .ess-about h2 {
+        color: var(--ess-green-dark);
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+    }
+
+    .ess-about p {
+        max-width: px;
+        margin: 0 auto 1.6rem;
+        text-align: justify;
+    }
+
+.ess-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+    .ess-logos img {
+        max-height: 70px;
+        width: auto;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+    }
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 900px) {
+    .ess-hero {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .ess-hero-visual {
+        order: -1;
+        margin-bottom: 1.5rem;
+    }
+
+    .ess-gif {
+        max-width: 260px;
+    }
+
+    .ess-buttons {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .ess-hero {
+        padding-top: 2.2rem;
+    }
+
+    .ess-hero-text h1 {
+        font-size: 2rem;
+    }
+}

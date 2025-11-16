@@ -1,0 +1,103 @@
+﻿.ess-section {
+    padding: 3rem 1.5rem;
+    background-color: #fdfdfd;
+    animation: fadeIn 2s ease-in-out;
+    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+    .ess-section h2 {
+        font-size: 2.3rem;
+        color: #2e7d32;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+.ess-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    color: #444;
+}
+
+.ess-definicion {
+    margin: 2rem auto;
+    max-width: 850px;
+    font-size: 1.05rem;
+    background-color: #e8f5e9;
+    border-left: 6px solid #43a047;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+}
+
+.timeline-title {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.8rem;
+    color: #00695c;
+}
+
+.timeline {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    border-left: 4px solid #b2dfdb;
+    padding-left: 1.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 1rem;
+}
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -1.15rem;
+        top: 0.4rem;
+        width: 12px;
+        height: 12px;
+        background-color: #26a69a;
+        border-radius: 50%;
+    }
+
+    .timeline-item .year {
+        font-weight: bold;
+        color: #00897b;
+        margin-bottom: 0.3rem;
+    }
+
+    .timeline-item .event {
+        color: #444;
+    }
+
+.ess-final-msg {
+    margin-top: 3rem;
+    background: #fff3e0;
+    padding: 1.5rem;
+    border-radius: 12px;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .ess-final-msg h3 {
+        color: #ef6c00;
+        margin-bottom: 0.7rem;
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

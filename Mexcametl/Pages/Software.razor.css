@@ -1,0 +1,604 @@
+﻿body {
+}
+/* ============================== */
+/*      PALETA SIGPAL (NUEVA)     */
+/* ============================== */
+
+:root {
+    --sigpal-bg: #f3f8f5; /* Fondo general suave, verde-clarito */
+    --sigpal-panel: #ffffff; /* Paneles y tarjetas */
+    --sigpal-primary: #0f5c46; /* Verde profundo SIGPAL (inspirado en Chiquihuite) */
+    --sigpal-primary-soft: #dff3ea; /* Verde agua suave para fondos */
+    --sigpal-accent-yellow: #ffd76a; /* Amarillo cálido tipo sol / fruto */
+    --sigpal-accent-sky: #4db1ff; /* Azul cielo para pequeños acentos */
+    --sigpal-earth: #c58b4b; /* Café tierra (tronco, suelo) */
+    --sigpal-text-main: #123426; /* Texto principal */
+    --sigpal-text-muted: #6b7b70; /* Texto secundario */
+    --sigpal-border-soft: #dde7e0; /* Bordes suaves */
+}
+
+/* ============================== */
+/*          BASE GENERAL          */
+/* ============================== */
+
+/* No tocamos body global para no pelear con otras páginas.
+   Todo va “encerrado” en clases SIGPAL. */
+
+.sigpal-layout {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #e8f5ed 0, #f3f8f5 55%, #fdfaf5 100%);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--sigpal-text-main);
+}
+
+/* Contenedor estándar */
+.sigpal-container {
+    width: 90%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ============================== */
+/*            HEADER              */
+/* ============================== */
+
+.sigpal-header {
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(221,231,224,0.8);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+    position: sticky;
+    padding: 0.3rem 0;
+    top: 0;
+    z-index: 50;
+}
+
+.sigpal-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    gap: 1rem;
+}
+
+.sigpal-brand {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.sigpal-logo {
+    height: 50px; /* baja el tamaño del logo para que no empuje */
+}
+
+.sigpal-brand-text {
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--sigpal-primary);
+    letter-spacing: 0.02em;
+}
+
+/* Navegación */
+
+.sigpal-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.3rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.sigpal-nav a {
+    color: var(--sigpal-text-main);
+    position: relative;
+    padding-bottom: 0.15rem;
+}
+
+    .sigpal-nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.2rem;
+        width: 0%;
+        height: 2px;
+        background: linear-gradient(to right, var(--sigpal-primary), var(--sigpal-accent-yellow));
+        transition: width 0.16s ease-out;
+    }
+
+    .sigpal-nav a:hover::after {
+        width: 100%;
+    }
+
+/* Botones SIGPAL */
+
+.sigpal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.sigpal-btn-primary {
+    background: var(--sigpal-primary);
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(15,92,70,0.35);
+}
+
+    .sigpal-btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(15,92,70,0.4);
+    }
+
+.sigpal-btn-secondary {
+    background: var(--sigpal-accent-yellow);
+    color: #5a4212;
+    box-shadow: 0 6px 16px rgba(255,215,106,0.45);
+}
+
+    .sigpal-btn-secondary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(255,215,106,0.55);
+    }
+
+/* ============================== */
+/*              HERO              */
+/* ============================== */
+
+.sigpal-hero {
+    position: relative;
+    color: #ffffff;
+    background: radial-gradient(circle at top left, #0f5c46 0, #0f3f33 55%, #06251c 100%);
+}
+
+.sigpal-hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+    gap: 2.4rem;
+    align-items: center;
+    padding: 3rem 0 3.4rem;
+}
+
+/* Pequeñas luces tipo bokeh para darle vida */
+.sigpal-hero::before,
+.sigpal-hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(18px);
+    opacity: 0.45;
+}
+
+.sigpal-hero::before {
+    width: 220px;
+    height: 220px;
+    background: rgba(255,215,106,0.5);
+    top: -40px;
+    left: -30px;
+}
+
+.sigpal-hero::after {
+    width: 180px;
+    height: 180px;
+    background: rgba(77,177,255,0.4);
+    bottom: -30px;
+    right: 10%;
+}
+
+.sigpal-hero-texto h1 {
+    font-size: 2.15rem;
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.02em;
+}
+
+.sigpal-hero-texto p {
+    font-size: 1.02rem;
+    margin-bottom: 0.9rem;
+    max-width: 30rem;
+}
+
+.sigpal-hero-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.4rem;
+    font-size: 0.96rem;
+}
+
+    .sigpal-hero-bullets li {
+        margin-bottom: 0.25rem;
+    }
+
+/* Panel lateral del hero */
+
+.sigpal-hero-panel {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sigpal-hero-card {
+    position: relative;
+    max-width: 360px;
+    padding: 1.8rem 1.6rem;
+    border-radius: 1.3rem;
+    overflow: hidden;
+     box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+
+    .sigpal-hero-card::before {
+        content: "";
+        position: absolute;
+        top: -18px;
+        right: -40px;
+        width: 120px;
+        height: 40px;
+        background: repeating-linear-gradient( -45deg, var(--sigpal-accent-yellow), var(--sigpal-accent-yellow) 8px, var(--sigpal-accent-sky) 8px, var(--sigpal-accent-sky) 16px );
+        border-radius: 999px;
+        opacity: 0.85;
+    }
+
+    .sigpal-hero-card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--sigpal-primary);
+    }
+
+    .sigpal-hero-card p {
+        font-size: 0.9rem;
+        color: var(--sigpal-text-muted);
+    }
+
+.sigpal-hero-note {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-top: 0.6rem;
+}
+
+/* ============================== */
+/*           SECCIONES            */
+/* ============================== */
+
+.sigpal-main {
+    padding-bottom: 2rem;
+}
+
+.sigpal-section {
+    padding: 3rem 0;
+}
+
+    .sigpal-section h2 {
+        font-size: 1.7rem;
+        color: var(--sigpal-primary);
+        margin-bottom: 0.7rem;
+    }
+
+.sigpal-section-subtitle {
+    font-size: 0.96rem;
+    color: var(--sigpal-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* ============================== */
+/*      CUERPO: OBJ/VEN/CONTEXTO  */
+/* ============================== */
+
+.sigpal-body-band {
+    background: var(--sigpal-primary-soft);
+    border-top: 1px solid rgba(15,92,70,0.08);
+    border-bottom: 1px solid rgba(15,92,70,0.08);
+}
+
+.sigpal-body-grid {
+    display: grid;
+    grid-template-columns: 2.2fr 2fr 2.2fr;
+    gap: 2rem;
+}
+
+.sigpal-body-block h2,
+.sigpal-body-block h3 {
+    margin-bottom: 0.5rem;
+}
+
+.sigpal-body-block h2 {
+    font-size: 1.4rem;
+    color: var(--sigpal-primary);
+}
+
+.sigpal-body-block h3 {
+    font-size: 1.15rem;
+    color: var(--sigpal-earth);
+}
+
+.sigpal-body-block p {
+    font-size: 0.96rem;
+    color: var(--sigpal-text-main);
+}
+
+/* Listas tipo beneficio */
+
+.sigpal-list {
+    list-style: none;
+    margin-top: 0.3rem;
+    font-size: 0.94rem;
+    color: var(--sigpal-text-main);
+}
+
+    .sigpal-list li {
+        position: relative;
+        padding-left: 1.2rem;
+        margin-bottom: 0.3rem;
+    }
+
+        .sigpal-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--sigpal-primary);
+            font-weight: 900;
+        }
+
+/* ============================== */
+/*         FUNCIONALIDADES        */
+/* ============================== */
+
+.sigpal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 1.6rem;
+    margin-top: 1.4rem;
+}
+
+.sigpal-card {
+    background: var(--sigpal-panel);
+    border-radius: 1.1rem;
+    padding: 1.4rem 1.3rem;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+    border: 1px solid var(--sigpal-border-soft);
+    text-align: center;
+}
+
+    .sigpal-card img {
+        height: 80px;
+        margin-bottom: 1.5rem;
+    }
+
+    .sigpal-card h3 {
+        font-size: 1.02rem;
+        color: var(--sigpal-primary);
+        margin-bottom: 0.4rem;
+    }
+
+    .sigpal-card p {
+        font-size: 0.9rem;
+        color: var(--sigpal-text-muted);
+    }
+
+/* ============================== */
+/*          CÓMO FUNCIONA         */
+/* ============================== */
+
+.sigpal-flow {
+    background: #fefbf3;
+}
+
+.sigpal-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 1.5rem;
+    margin-top: 1.4rem;
+}
+
+.sigpal-flow-step {
+    background: var(--sigpal-panel);
+    border-radius: 1.1rem;
+    padding: 1.3rem 1.2rem 1.2rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    border: 1px solid var(--sigpal-border-soft);
+    position: relative;
+}
+
+.sigpal-flow-number {
+    position: absolute;
+    top: -12px;
+    left: 14px;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: var(--sigpal-accent-yellow);
+    color: #5a4212;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sigpal-flow-step h3 {
+    font-size: 1.02rem;
+    color: var(--sigpal-earth);
+    margin: 0.6rem 0 0.3rem;
+}
+
+.sigpal-flow-step p {
+    font-size: 0.9rem;
+    color: var(--sigpal-text-muted);
+}
+
+/* ============================== */
+/*        CTA + FORMULARIO        */
+/* ============================== */
+
+.sigpal-cta {
+    background: var(--sigpal-panel);
+}
+
+.sigpal-cta-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+    gap: 2.4rem;
+    align-items: flex-start;
+}
+
+.sigpal-cta-texto p {
+    font-size: 0.95rem;
+    color: var(--sigpal-text-main);
+    margin-bottom: 0.7rem;
+}
+
+/* Formulario */
+
+.sigpal-form {
+    background: var(--sigpal-primary-soft);
+    border-radius: 1.1rem;
+    padding: 1.5rem 1.4rem 1.6rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    border: 1px solid rgba(15,92,70,0.12);
+}
+
+    .sigpal-form label {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--sigpal-earth);
+    }
+
+    .sigpal-form input {
+        margin-top: 0.25rem;
+        padding: 0.55rem 0.7rem;
+        border-radius: 0.7rem;
+        border: 1px solid #c3d7cd;
+        font-size: 0.95rem;
+        outline: none;
+        transition: border 0.12s ease, box-shadow 0.12s ease;
+    }
+
+        .sigpal-form input:focus {
+            border-color: var(--sigpal-primary);
+            box-shadow: 0 0 0 2px rgba(15,92,70,0.18);
+        }
+
+    .sigpal-form button {
+        margin-top: 0.5rem;
+    }
+
+/* ============================== */
+/*             FOOTER             */
+/* ============================== */
+
+.sigpal-footer {
+    background: var(--sigpal-primary);
+    color: #ffffff;
+    text-align: center;
+    padding: 1.3rem 0;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+    .sigpal-footer a {
+        color: var(--sigpal-accent-yellow);
+    }
+
+        .sigpal-footer a:hover {
+            text-decoration: underline;
+        }
+
+/* ============================== */
+/*      AJUSTES RESPONSIVOS       */
+/* ============================== */
+
+@media (max-width: 980px) {
+    .sigpal-hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .sigpal-hero-panel {
+        justify-content: flex-start;
+        margin-top: 1.6rem;
+    }
+
+    .sigpal-body-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sigpal-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .sigpal-flow-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .sigpal-cta-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .sigpal-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sigpal-nav ul {
+        flex-wrap: wrap;
+        gap: 0.7rem;
+    }
+
+    .sigpal-body-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sigpal-grid,
+    .sigpal-flow-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sigpal-section {
+        padding: 2.4rem 0;
+    }
+
+    .sigpal-hero-inner {
+        padding: 2.4rem 0 2.8rem;
+    }
+
+    .sigpal-hero-texto h1 {
+        font-size: 1.7rem;
+    }
+}
+/* ============================== */
+/*       BANNER ENTRE SECCIONES   */
+/* ============================== */
+
+.sigpal-banner {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sigpal-banner-img {
+    width: 100%;
+    height: 300px; /* Ajusta a tu gusto: 250, 300, 350 */
+    background: url('/limon.png') center no-repeat;
+    filter: brightness(0.95); /* se ve más profesional */
+    box-shadow: 0 -5px 18px rgba(0,0,0,0.12);
+}

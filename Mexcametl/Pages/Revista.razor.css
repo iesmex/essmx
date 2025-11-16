@@ -1,0 +1,578 @@
+﻿body {
+}
+
+/* ---------------------------
+   REVISTA CHIQUIHUITE – ESTILOS
+   --------------------------- */
+
+:root {
+    --revista-bg: #f5f7f6;
+    --revista-card-bg: #ffffff;
+    --revista-primary: #0f5c46;
+    --revista-primary-soft: #e0f3eb;
+    --revista-accent-amarillo: #ffd76a;
+    --revista-accent-rosa: #ff8aa5;
+    --revista-accent-azul: #4db1ff;
+    --revista-text-main: #123426;
+    --revista-text-muted: #6b7b70;
+    --revista-border-soft: #e0e7e4;
+    --revista-radius-lg: 1.25rem;
+}
+
+/* CONTENEDOR GENERAL */
+.revista-page {
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    padding: 2rem 1.5rem 3rem;
+    background: var(--revista-bg);
+    border-radius: 1.5rem;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.04);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------------------------
+   HERO / CABECERA
+   --------------------------- */
+
+.revista-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 1.8rem;
+    align-items: stretch;
+    margin-bottom: 2.5rem;
+}
+
+.revista-hero-text h1 {
+    font-size: 2.1rem;
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.03em;
+    background: linear-gradient(to left, #5ad09f, #25d366);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: #f5f7f6;
+    font-weight: 700;
+}
+
+.revista-hero-text p {
+    margin: 0.2rem 0;
+    color: var(--revista-text-muted);
+    line-height: 1.5;
+}
+
+.revista-hero-sub {
+    margin-top: 0.8rem;
+    font-weight: 500;
+}
+
+.revista-hero-actions {
+    margin-top: 1.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* BOTONES GENERALES */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+
+.btn-sm {
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+}
+
+.btn-primary {
+    background: var(--revista-primary);
+    color: #0f5c46;
+    box-shadow: 0 8px 20px #25d366;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 11px 26px rgba(7, 67, 487, 0.2);
+    }
+
+.btn-ghost {
+    background: #0e4a36;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 30px;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.15);
+    transition: 0.2s ease;
+}
+
+  
+
+
+    .btn-ghost:hover {
+        background: #149157;
+        transform: scale(1.05);
+    }
+
+/* TARJETA HERO DERECHA */
+.revista-hero-card {
+    background: linear-gradient(135deg, #ffffff, #f2fbf7);
+    border-radius: var(--revista-radius-lg);
+    padding: 1.5rem 1.6rem;
+    border: 1px solid var(--revista-border-soft);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+    .revista-hero-card::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        right: -40px;
+        width: 120px;
+        height: 40px;
+        background: repeating-linear-gradient( -45deg, var(--revista-accent-amarillo), var(--revista-accent-amarillo) 8px, var(--revista-accent-rosa) 8px, var(--revista-accent-rosa) 16px );
+        opacity: 0.9;
+        border-radius: 999px;
+    }
+
+    .revista-hero-card h2 {
+        margin: 0 0 0.8rem;
+        font-size: 1.3rem;
+        color: var(--revista-text-main);
+    }
+
+    .revista-hero-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 0.8rem;
+    }
+
+    .revista-hero-card li {
+        position: relative;
+        padding-left: 1.1rem;
+        margin-bottom: 0.4rem;
+        color: var(--revista-text-muted);
+        font-size: 0.9rem;
+    }
+
+        .revista-hero-card li::before {
+            content: "•";
+            position: absolute;
+            left: 0.2rem;
+            top: 0;
+            color: var(--revista-primary);
+        }
+
+.revista-hero-note {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--revista-text-muted);
+    font-style: italic;
+}
+
+/* ---------------------------
+   SECCIONES GENERALES
+   --------------------------- */
+
+.revista-section {
+    margin-top: 2rem;
+}
+
+.revista-section-header h2 {
+    margin: 0 0 0.4rem;
+    font-size: 1.6rem;
+    color: var(--revista-text-main);
+}
+
+.revista-section-header p {
+    margin: 0;
+    color: var(--revista-text-muted);
+}
+
+/* ---------------------------
+   CONVOCATORIA
+   --------------------------- */
+
+.revista-convocatoria {
+    background: var(--revista-card-bg);
+    border-radius: var(--revista-radius-lg);
+    padding: 1.6rem 1.7rem 1.9rem;
+    border: 1px solid var(--revista-border-soft);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.03);
+}
+
+.convocatoria-grid {
+    margin-top: 1.3rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.2rem;
+}
+
+.convocatoria-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 1px solid #e3ece6;
+    padding: 1.1rem 1.2rem;
+    position: relative;
+}
+
+.convocatoria-main {
+    border: 1px solid #cbe5d6;
+    background: linear-gradient(135deg, #f7fff9, #f0faf5);
+}
+
+.convocatoria-card h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.05rem;
+    color: var(--revista-text-main);
+}
+
+.convocatoria-card p {
+    margin: 0.2rem 0 0.6rem;
+    font-size: 0.9rem;
+    color: var(--revista-text-muted);
+}
+
+/* CINTA / RIBBON */
+.convocatoria-ribbon {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.9rem;
+    background: var(--revista-primary);
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+/* LISTAS */
+.convocatoria-list,
+.convocatoria-modalidades,
+.convocatoria-steps {
+    margin: 0.3rem 0 0.6rem;
+    padding-left: 1.1rem;
+    font-size: 0.88rem;
+    color: var(--revista-text-muted);
+}
+
+    .convocatoria-modalidades li + li,
+    .convocatoria-steps li + li {
+        margin-top: 0.25rem;
+    }
+
+.convocatoria-footnote,
+.convocatoria-note {
+    margin: 0.4rem 0 0;
+    font-size: 0.8rem;
+    color: var(--revista-text-muted);
+}
+
+/* ---------------------------
+   EDICIONES PUBLICADAS
+   --------------------------- */
+
+.revista-ediciones {
+    margin-top: 2.2rem;
+}
+
+/* TOOLBAR */
+.revista-toolbar {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.revista-search {
+    flex: 1 1 220px;
+    max-width: 320px;
+}
+
+    .revista-search input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border-radius: 999px;
+        border: 1px solid var(--revista-border-soft);
+        font-size: 0.9rem;
+        outline: none;
+        transition: border 0.12s ease, box-shadow 0.12s ease;
+    }
+
+        .revista-search input:focus {
+            border-color: rgba(15, 92, 70, 0.6);
+            box-shadow: 0 0 0 2px rgba(15, 92, 70, 0.08);
+        }
+
+/* CHIPS / FILTROS */
+.revista-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.chip {
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.78rem;
+    border: 1px solid #d0ddd6;
+    background: #ffffff;
+    color: #496257;
+    cursor: pointer;
+    transition: background 0.12s ease, color 0.12s ease, border 0.12s ease;
+}
+
+.chip-active {
+    background: var(--revista-primary-soft);
+    color: var(--revista-primary);
+    border-color: rgba(15, 92, 70, 0.35);
+}
+
+.chip:hover {
+    background: #f1f6f3;
+}
+
+/* EDICIÓN DESTACADA */
+.edicion-destacada {
+    margin-top: 1.5rem;
+    padding: 1.5rem 1.6rem;
+    background: #ffffff;
+    border-radius: var(--revista-radius-lg);
+    border: 1px solid #d7e7dd;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+}
+
+.edicion-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 1px solid var(--revista-border-soft);
+    padding: 1rem 1.1rem 1.2rem;
+    font-size: 0.9rem;
+    color: var(--revista-text-muted);
+}
+
+    .edicion-card h3 {
+        margin: 0.4rem 0 0.5rem;
+        font-size: 1.05rem;
+        color: var(--revista-text-main);
+    }
+
+.edicion-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.edicion-badge {
+    background: var(--revista-accent-amarillo);
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+    color: #5f4417;
+}
+
+.edicion-fecha {
+    color: var(--revista-text-muted);
+}
+
+/* RESUMEN DE EDICIÓN */
+.edicion-resumen {
+    list-style: disc;
+    padding-left: 1.1rem;
+    margin: 0.4rem 0 0.8rem;
+}
+
+/* GRID DE OTRAS EDICIONES */
+.ediciones-grid {
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.edicion-card-placeholder {
+    border-style: dashed;
+    text-align: left;
+}
+
+/* ---------------------------
+   RESPONSIVE
+   --------------------------- */
+
+@media (max-width: 900px) {
+    .revista-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .convocatoria-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .revista-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ediciones-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .revista-page {
+        padding: 1.4rem 1rem 2rem;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+.revista-whatsapp-wrapper {
+    margin-top: 0.75rem; /* separa el botón del texto de arriba */
+}
+
+.revista-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1.4rem;
+    border-radius: 999px;
+    background: #25d366; /* verde WhatsApp */
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+    .revista-whatsapp-btn:hover {
+        background: #1fb257;
+        box-shadow: 0 0 0 3px rgba(37,211,102,0.18);
+    }
+
+.revista-institucional {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid #e5ece8;
+}
+
+.revista-institucional-img {
+    width: 400px;
+    max-width: 90%;
+    margin-bottom: 1.2rem;
+    opacity: 0.95;
+}
+
+.revista-institucional-text {
+    max-width: 1000px;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: #33413b;
+    text-align: justify;
+    line-height: 1.55;
+}
+
+.revista-institucional-text {
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 800px;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.revista-institucional-img {
+    display: block;
+    margin: 1rem auto;
+    max-width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.sagan-quote {
+    text-align: center;
+    margin: 3rem auto 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f0fdf4, #e0f7fa);
+    border-radius: 20px;
+    max-width: 900px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    font-family: 'Georgia', serif;
+    animation: fadeIn 2s ease-in-out;
+}
+
+    .sagan-quote p {
+        font-size: 1.3rem;
+        font-style: italic;
+        color: #222;
+        margin-bottom: 0.5rem;
+    }
+
+    .sagan-quote .highlight {
+        font-weight: bold;
+        color: #2e7d32; /* verde profundo */
+        background-color: rgba(46,125,50,0.1);
+        padding: 0 4px;
+        border-radius: 4px;
+    }
+
+    .sagan-quote .highlight2 {
+        font-weight: bold;
+        color: #0288d1; /* azul cielo */
+        background-color: rgba(2,136,209,0.1);
+        padding: 0 4px;
+        border-radius: 4px;
+    }
+
+    .sagan-quote .author {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #6d4c41;
+    }
+
+.gif-container, .hero-gif {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.responsive-gif {
+    max-width: 90%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+    .responsive-gif:hover {
+        transform: scale(1.03);
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
