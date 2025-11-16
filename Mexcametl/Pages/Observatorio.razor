@@ -1739,7 +1739,7 @@ public string GetFillColorJs(string claveSvg) => GetFillColor(claveSvg);
     {
         try
         {
-            MapaSvg = await Http.GetStringAsync("/plano/mx.svg");
+            MapaSvg = await Http.GetStringAsync("plano/mx.svg");
             MensajeCarga = "Mapa cargado.";
         }
         catch (Exception ex)
